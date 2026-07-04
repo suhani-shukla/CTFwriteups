@@ -20,13 +20,8 @@ Each writeup follows roughly the same shape:
 - **Exploitation** — step-by-step solve, with commands/scripts/payloads
 - **Flag**
 
-Flags are redacted (`flag{redacted}`) depending on the challenge platform's rules.
+Flags are redacted (`picoCTF{redacted}`) depending on the challenge platform's rules.
 
-## Index
-
-| Date | Challenge | Category | Notes |
-|------|-----------|----------|-------|
-| — | — | — | Add entries here as writeups are posted |
 
 ## Source
 
