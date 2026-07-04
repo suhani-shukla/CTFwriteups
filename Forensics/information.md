@@ -1,4 +1,4 @@
-# cat — Forensics
+# Information
 
 **CTF:** picoCTF
 
