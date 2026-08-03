@@ -1,28 +1,26 @@
 # CTF Writeups
 
-Solutions and approach notes for challenges from [CyLab Academy — Learning Path 16](https://learn.cylabacademy.org/learning-paths/16/115). Covers cryptography, forensics, and whatever other categories the path throws at me.
+Solutions to picoCTF challenges.
+
+## Beginners Guide Library
+
+| Challenge | Category | Flag format |
+|---|---|---|
+| [Warmed up](Beginners-Guide-Library/warmedUp.md) | General Skills | `picoCTF{...}` |
+| [2warm](Beginners-Guide-Library/2warm.md) | General Skills | `picoCTF{...}` |
+| [Bases](Beginners-Guide-Library/Bases.md) | General Skills | `picoCTF{...}` |
+| [Wave a flag](Beginners-Guide-Library/wave-a-flag.md) | General Skills | `picoCTF{...}` |
+| [Tab, Tab, Attack](Beginners-Guide-Library/tab-tab-attack.md) | General Skills | `picoCTF{...}` |
+| [strings it](Beginners-Guide-Library/strings-it.md) | General Skills | `picoCTF{...}` |
+| [First Grep](Beginners-Guide-Library/first-grep.md) | General Skills | `picoCTF{...}` |
 
 ## Structure
 
-Writeups are organized by category, with one Markdown file per challenge.
-
-
-
-Not every category will have entries — folders get added as challenges come up.
-
-## Writeup format
-
-Each writeup follows roughly the same shape:
-
-- **Challenge name & category**
-- **Recon / first look** — what the challenge gave you, initial poking around
-- **The bug / trick** — the core insight
-- **Exploitation** — step-by-step solve, with commands/scripts/payloads
-- **Flag**
-
-Flags are redacted (`picoCTF{redacted}`) depending on the challenge platform's rules.
-
-
-## Source
-
-Challenges from [learn.cylabacademy.org](https://learn.cylabacademy.org/learning-paths/16/115).
+Each writeup follows:
+```
+# Challenge Name
+## Challenge
+## Hints
+## Solution
+## Flag
+```
