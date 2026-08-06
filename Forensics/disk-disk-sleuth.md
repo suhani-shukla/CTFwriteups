@@ -1,49 +1,43 @@
-# Disk, Disk, Sleuth II
+# Disk, Disk, Sleuth
 
 ## Challenge
-The file with the flag is named `down-at-the-bottom.txt`. Disk image: `dds2-alpine.flag.img.gz`.
+Use `srch_strings` from The Sleuth Kit and some terminal-fu to find a flag in the disk image `dds1-alpine.flag.img.gz`.
 
 ## Hints
-1. The Sleuth Kit has some great tools for this challenge as well.
-2. Sleuthkit docs: TSK Tool Overview.
-3. This disk can also be booted with `qemu`.
+1. Have you ever used `file` to determine what a file was?
+2. Relevant terminal-fu in picoGym: `https://play.picoctf.org/practice/challenge/85`
+3. Mastering this terminal-fu enables finding the flag in a single command: `https://play.picoctf.org/practice/challenge/48`
+4. Using your own computer, `qemu` could be used to boot from this disk.
 
 ## Solution
 1. Extracted the gzip-compressed disk image:
 ```
-   gunzip dds2-alpine.flag.img.gz
+   gunzip dds1-alpine.flag.img.gz
 ```
-2. Confirmed the file type:
+2. Confirmed the file type and partition layout:
 ```
-   file dds2-alpine.flag.img
-```
-   Output confirmed a DOS/MBR boot sector with one partition, start sector `2048`, `260096` sectors.
-3. Listed the partition table to get the exact partition offset:
-```
-   mmls dds2-alpine.flag.img
-```
-   Confirmed the Linux partition (`0x83`) starts at sector `2048`.
-4. Listed the top-level file/directory structure of the partition using the offset:
-```
-   fls -o 2048 dds2-alpine.flag.img
-```
-   This showed only top-level entries (standard Linux root directories), not the target file.
-5. Recursively listed all files in the partition and filtered for the target filename:
-```
-   fls -r -o 2048 dds2-alpine.flag.img | grep down-at-the-bottom.txt
+   file dds1-alpine.flag.img
 ```
    Output:
 ```
-   + r/r 18291: down-at-the-bottom.txt
+   dds1-alpine.flag.img: DOS/MBR boot sector; partition 1 : ID=0x83, active, start-CHS (0x0,32,33), end-CHS (0x10,81,1), startsector 2048, 260096 sectors
 ```
-   This gave the inode number (`18291`) of the target file.
-6. Extracted the file's contents directly from the disk image using its inode number:
+3. Attempted to search the image for the flag using `srch_string`, which failed since the correct binary name is `srch_strings`:
 ```
-   icat -o 2048 dds2-alpine.flag.img 18291
+   srch_string dds1-alpine.flag.img | grep "pico"
 ```
-   The output displayed the flag in ASCII-art bubble-letter formatting, one character per box, spelling out the flag.
+4. Located the correct binary:
+```
+   which srch_strings
+```
+   Output: `/usr/bin/srch_strings`
+5. Ran `srch_strings` directly on the raw disk image (without mounting it) and filtered for the flag prefix:
+```
+   /usr/bin/srch_strings dds1-alpine.flag.img | grep "pico"
+```
+6. Among a few unrelated kernel symbol matches, the output included the flag embedded in what appears to be a boot/init script line (`SAY picoCTF{...}`).
 
 ## Flag
 ```
-picoCTF{f0r3ns1c4t0r_n0vic3_4bd721f2}
+picoCTF{f0r3ns1c4t0r_n30phyt3_5e56e786}
 ```
